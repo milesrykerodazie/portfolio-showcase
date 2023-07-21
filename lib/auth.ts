@@ -63,8 +63,6 @@ export const authOptions: NextAuthOptions = {
 
   callbacks: {
     async session({ session }: any) {
-      console.log("the first => ", session);
-
       const email = session?.user?.email as string;
 
       try {
@@ -91,8 +89,6 @@ export const authOptions: NextAuthOptions = {
               ...data,
             },
           };
-
-          console.log("the new generated session => ", newSession);
 
           return newSession as SessionInterface;
         }

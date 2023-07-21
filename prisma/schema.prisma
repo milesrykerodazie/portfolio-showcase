@@ -66,6 +66,7 @@ model Project {
   id          String         @id @default(auto()) @map("_id") @db.ObjectId
   owner_id    String         @db.ObjectId
   title       String
+  title_slug  String         @unique
   description String
   liveSiteUrl String
   githubUrl   String

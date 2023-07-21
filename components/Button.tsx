@@ -1,10 +1,11 @@
 import Image from "next/image";
 import { MouseEventHandler } from "react";
+import type { IconType } from "react-icons";
 
 type Props = {
   title: string;
-  leftIcon?: string | null;
-  rightIcon?: string | null;
+  IconLeft?: IconType | null;
+  IconRight?: IconType | null;
   handleClick?: MouseEventHandler;
   submitting?: boolean | false;
   type?: "button" | "submit";
@@ -14,8 +15,8 @@ type Props = {
 
 const Button = ({
   title,
-  leftIcon,
-  rightIcon,
+  IconLeft,
+  IconRight,
   handleClick,
   submitting,
   type,
@@ -32,13 +33,9 @@ const Button = ({
         } rounded-xl text-sm font-medium max-md:w-full`}
     onClick={handleClick}
   >
-    {leftIcon && (
-      <Image src={leftIcon} width={14} height={14} alt="left icon" />
-    )}
+    {IconLeft && <IconLeft />}
     {title}
-    {rightIcon && (
-      <Image src={rightIcon} width={14} height={14} alt="right icon" />
-    )}
+    {IconRight && <IconRight />}
   </button>
 );
 

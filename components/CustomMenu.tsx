@@ -3,6 +3,7 @@
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import Image from "next/image";
+import { BsChevronDown } from "react-icons/bs";
 
 type Props = {
   title: string;
@@ -13,14 +14,14 @@ type Props = {
 
 const CustomMenu = ({ title, state, filters, setState }: Props) => (
   <div className="flexStart flex-col w-full gap-7 relative">
-    <label htmlFor={title} className="w-full text-gray-100">
+    <label htmlFor={title} className="w-full text-primary text-sm lg:text-base">
       {title}
     </label>
-    <Menu as="div" className="self-start relative">
+    <Menu as="div" className="self-start relative w-full">
       <div>
         <Menu.Button className="flexCenter custom_menu-btn">
           {state || "Category"}
-          <Image src="/arrow-down.svg" width={10} height={5} alt="arrow down" />
+          <BsChevronDown />
         </Menu.Button>
       </div>
       <Transition

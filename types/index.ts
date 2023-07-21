@@ -3,25 +3,33 @@ import { User, Session } from "next-auth";
 export type FormState = {
   title: string;
   description: string;
-  image: string;
+  images: string[];
   liveSiteUrl: string;
   githubUrl: string;
   category: string;
 };
 
+export type ProjectImage = {
+  id: string;
+  projectId: string;
+  public_id: string;
+  url: string;
+  owner: string;
+};
+
 export interface ProjectInterface {
   title: string;
   description: string;
-  image: string;
+  images: ProjectImage[];
   liveSiteUrl: string;
   githubUrl: string;
   category: string;
   id: string;
-  createdBy: {
+  owner_id: string;
+  title_slug: string;
+  User: {
     name: string;
-    email: string;
-    avatarUrl: string;
-    id: string;
+    image: string;
   };
 }
 
