@@ -58,7 +58,7 @@ body {
 }
 
 .user-info {
-  @apply flex flex-wrap whitespace-nowrap text-sm font-normal gap-2 w-full;
+  @apply flex flex-wrap whitespace-nowrap text-xs lg:text-sm font-normal gap-2 w-full text-primary items-center;
 }
 
 /* Home */
@@ -68,11 +68,11 @@ body {
 
 /* Project Actions */
 .edit-action_btn {
-  @apply p-3 text-gray-100 bg-light-white-400 rounded-lg text-sm font-medium;
+  @apply p-3  bg-white drop-shadow-md rounded-lg text-sm font-medium;
 }
 
 .delete-action_btn {
-  @apply p-3 text-gray-100 hover:bg-red-600 rounded-lg text-sm font-medium;
+  @apply p-3 rounded-lg text-sm font-medium;
 }
 
 /* Related Project Card */
@@ -145,7 +145,7 @@ body {
 
 /* Project Form */
 .form {
-  @apply flex-col w-full lg:pt-24 pt-12 gap-10 text-lg max-w-5xl mx-auto;
+  @apply flex-col w-full lg:pt-24 pt-5 gap-10 text-lg max-w-5xl mx-auto;
 }
 
 .form_image-container {
@@ -156,6 +156,9 @@ body {
   @apply w-full py-4 px-2 text-primary border-2 border-primary/50 border-dashed text-sm lg:text-base grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-2;
 }
 
+.form_image {
+  @apply w-full py-4 px-2 text-primary border border-primary/50 border-dotted text-sm lg:text-base grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-2;
+}
 .form_image-input {
   @apply w-full  h-full cursor-pointer;
 }

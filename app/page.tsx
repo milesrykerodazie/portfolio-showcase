@@ -11,16 +11,18 @@ type SearchParams = {
 };
 
 type Props = {
-  searchParams: SearchParams;
+  searchParams: {
+    category: string;
+  };
 };
 
 export const dynamic = "force-dynamic";
 export const dynamicParams = true;
 export const revalidate = 0;
 
-const Home = async () => {
+const Home = async ({ searchParams }: Props) => {
   //get all projects
-  const projects = (await fetchAllProjects()) as ProjectInterface[];
+  const projects = (await fetchAllProjects(searchParams)) as ProjectInterface[];
 
   return (
     <section className="flexStart flex-col paddings mb-16">

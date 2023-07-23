@@ -20,7 +20,7 @@ const ProjectCard = ({ project }: { project: ProjectInterface }) => {
   return (
     <div className="flexCenter flex-col rounded-2xl drop-shadow-card">
       <Link
-        href={`/project/${project.id}`}
+        href={`/project/${project.title_slug}`}
         className="flexCenter group relative w-full h-full"
       >
         <Image
