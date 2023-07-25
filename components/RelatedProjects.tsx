@@ -33,6 +33,11 @@ const RelatedProjects = ({
           <ProjectCard key={project.id} project={project} session={session} />
         ))}
       </div>
+      {relatedProjects?.length < 1 && (
+        <p className=" text-center text-primary text-sm lg:text-base">
+          No Related Projects.
+        </p>
+      )}
     </section>
   );
 };

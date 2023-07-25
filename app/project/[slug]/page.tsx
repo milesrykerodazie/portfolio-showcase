@@ -26,7 +26,9 @@ const ProjectPage = async ({ params }: { params: ProjectParams }) => {
   return (
     <>
       {projectDetails === null ? (
-        <section>no project</section>
+        <section className=" text-center text-primary text-sm lg:text-base">
+          Project Not found.
+        </section>
       ) : (
         <ProjectDetails
           projectDetails={projectDetails}

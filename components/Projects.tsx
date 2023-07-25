@@ -77,7 +77,7 @@ const Projects = ({
         </>
       ) : (
         <>
-          <p className="no-result-text text-center text-primary text-sm lg:text-base">
+          <p className=" text-center text-primary text-sm lg:text-base">
             No projects found.
           </p>
         </>
