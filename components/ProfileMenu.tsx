@@ -52,7 +52,7 @@ const ProfileMenu = ({ session }: { session: SessionInterface }) => {
               </p>
             </div>
 
-            <div className="flex flex-col gap-3 pt-10 items-start w-full">
+            <div className="flex flex-col gap-3 pt-10 items-start w-full space-y-3">
               <Menu.Item>
                 <Link
                   href={`/profile/${session?.user?.id}`}
@@ -85,7 +85,7 @@ const ProfileMenu = ({ session }: { session: SessionInterface }) => {
               <Menu.Item>
                 <button
                   type="button"
-                  className="text-xs lg:text-sm font-semibold text-primary"
+                  className="text-xs lg:text-sm font-semibold text-primary py-2"
                   onClick={() => signOut()}
                 >
                   Sign out
