@@ -77,7 +77,7 @@ const Projects = ({
         </>
       ) : (
         <>
-          <p className=" text-center text-primary text-sm lg:text-base">
+          <p className=" text-center text-primary text-sm lg:text-base py-10">
             No projects found.
           </p>
         </>
