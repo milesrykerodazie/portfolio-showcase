@@ -4,13 +4,13 @@ import axios from "axios";
 import { FcGoogle } from "react-icons/fc";
 import { useCallback, useState } from "react";
 import { signIn } from "next-auth/react";
-import Modal from "./Modal";
 import useRegisterModal from "@/hooks/useRegisterModal";
 import Input from "../inputs/Input";
 import AuthButton from "../AuthButton";
 import useLoginModal from "@/hooks/useLoginModal";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
+import AuthModal from "./AuthModal";
 
 const Register = () => {
   //rout for handling route navigation
@@ -40,27 +40,28 @@ const Register = () => {
   }, [registerModal, loginModal]);
 
   //register user method
-  const handleRegister = () => {
+  const handleRegister = async () => {
     setIsLoading(true);
 
-    if (password !== confirmPassword) {
-      setPasswordMismach("Passwords dont match, try again.");
-      setPassword("");
-      setConfirmPassword("");
-      route.refresh();
-      return;
-    }
+    try {
+      if (password !== confirmPassword) {
+        setPasswordMismach("Passwords dont match, try again.");
+        setPassword("");
+        setConfirmPassword("");
+        route.refresh();
+        return;
+      }
 
-    const regData = {
-      name,
-      email,
-      username,
-      password,
-    };
+      const regData = {
+        name,
+        email,
+        username,
+        password,
+      };
 
-    axios
-      .post("/api/register", regData)
-      .then((response) => {
+      const response = await axios.post("/api/register", regData);
+
+      if (response?.data) {
         if (response?.data?.success === false) {
           toast.error(response?.data?.message);
         }
@@ -74,13 +75,12 @@ const Register = () => {
           registerModal.onClose();
           loginModal.onOpen();
         }
-      })
-      .catch((error) => {
-        console.log(error?.response?.data);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+      }
+    } catch (error: any) {
+      console.log(error?.response?.data);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   //the register body
@@ -158,7 +158,7 @@ const Register = () => {
   );
 
   return (
-    <Modal
+    <AuthModal
       disabled={isLoading}
       isOpen={registerModal.isOpen}
       title="Market Register"

@@ -40,8 +40,19 @@ const EditProjectForm = ({
     category: projectDetails?.category,
   });
 
+  const [count, setCount] = useState(
+    form?.description?.length > 0 ? form?.description?.length : 0
+  );
+
   const handleStateChange = (fieldName: keyof FormState, value: string) => {
-    setForm((prevForm) => ({ ...prevForm, [fieldName]: value }));
+    // setForm((prevForm) => ({ ...prevForm, [fieldName]: value }));
+    setForm((prevForm) => {
+      const updatedForm = { ...prevForm, [fieldName]: value };
+      if (fieldName === "description") {
+        setCount(value.length);
+      }
+      return updatedForm;
+    });
   };
 
   //handling the onChange of the images,
@@ -291,6 +302,7 @@ const EditProjectForm = ({
         state={form.description}
         placeholder="Showcase and discover remarkable developer projects."
         isTextArea
+        count={count}
         setState={(value) => handleStateChange("description", value)}
       />
 
@@ -322,7 +334,7 @@ const EditProjectForm = ({
           type="submit"
           disabled={submitting}
           className={`flexCenter gap-2 p-2 lg:px-4 lg:py-3 text-xs lg:text-sm 
-            text-white bg-primary rounded-md disabled:opacity-25 disabled:cursor-not-allowed`}
+            text-white bg-primary rounded-md disabled:opacity-25 disabled:cursor-not-allowed w-full`}
         >
           {submitting ? (
             <div className="gap-2 flex items-center justify-center">

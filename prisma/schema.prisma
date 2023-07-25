@@ -38,20 +38,34 @@ model Session {
 }
 
 model User {
-  id            String     @id @default(auto()) @map("_id") @db.ObjectId
-  name          String?
-  username      String?    @unique
-  email         String?    @unique
-  password      String?
-  profilePic    UserImage?
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-  projects      Project[]
+  id               String          @id @default(auto()) @map("_id") @db.ObjectId
+  name             String?
+  username         String?         @unique
+  email            String?         @unique
+  linkedinUrl      String?
+  profession       String?
+  shortDescription String?
+  password         String?
+  portfolioImage   String?
+  profilePic       UserImage?
+  portfolioPic     portfolioImage?
+  emailVerified    DateTime?
+  image            String?
+  accounts         Account[]
+  sessions         Session[]
+  projects         Project[]
+  Likes            Likes[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model portfolioImage {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  public_id String @unique
+  url       String @default("")
+  userId    String @unique @db.ObjectId // relation scalar field (used in the `@relation` attribute above)
+  User      User?  @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model UserImage {
@@ -71,6 +85,8 @@ model Project {
   liveSiteUrl String
   githubUrl   String
   category    String
+  likes       Likes[]
+  views       Int            @default(0)
   images      ProjectImage[]
   User        User           @relation(fields: [owner_id], references: [id], onDelete: Cascade)
   createdAt   DateTime       @default(now())
@@ -83,5 +99,13 @@ model ProjectImage {
   public_id String  @default("")
   url       String  @default("")
   owner     String  @unique
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model Likes {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  projectId String  @db.ObjectId
+  userId    String  @unique @db.ObjectId
+  User      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
 }

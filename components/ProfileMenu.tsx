@@ -37,11 +37,7 @@ const ProfileMenu = ({ session }: { session: SessionInterface }) => {
           leaveFrom="transform opacity-100"
           leaveTo="transform opacity-0"
         >
-          <Menu.Items
-            static
-            className="flexStart profile_menu-items"
-            onMouseLeave={() => setOpenModal(false)}
-          >
+          <Menu.Items static className="flexStart profile_menu-items">
             <div className="flex flex-col items-center gap-y-4">
               {session?.user?.image && (
                 <img
@@ -61,6 +57,7 @@ const ProfileMenu = ({ session }: { session: SessionInterface }) => {
                 <Link
                   href={`/profile/${session?.user?.id}`}
                   className="text-xs md:text-sm text-primary w-full"
+                  onClick={() => setOpenModal(false)}
                 >
                   Work Preferences
                 </Link>
@@ -69,6 +66,7 @@ const ProfileMenu = ({ session }: { session: SessionInterface }) => {
                 <Link
                   href={`/profile/${session?.user?.id}`}
                   className="text-xs md:text-sm text-primary w-full"
+                  onClick={() => setOpenModal(false)}
                 >
                   Settings
                 </Link>
@@ -77,6 +75,7 @@ const ProfileMenu = ({ session }: { session: SessionInterface }) => {
                 <Link
                   href={`/profile/${session?.user?.id}`}
                   className="text-xs md:text-sm text-primary w-full"
+                  onClick={() => setOpenModal(false)}
                 >
                   Profile
                 </Link>

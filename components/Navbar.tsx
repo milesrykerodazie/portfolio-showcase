@@ -18,9 +18,9 @@ const Navbar = async () => {
       <div className="flex-1 flexStart gap-4 lg:gap-10">
         <Link href="/">
           <img
-            src="/images/no-user.jpg"
+            src="/images/logo.png"
             alt="logo"
-            className="w-8 h-8 lg:w-10 lg:h-10 rounded-full"
+            className="h-10 object-cover rounded-full"
           />
         </Link>
         <ul className="md:flex hidden text-sm gap-3 lg:gap-7 whitespace-nowrap text-primary">

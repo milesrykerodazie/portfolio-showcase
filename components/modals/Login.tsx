@@ -8,8 +8,8 @@ import Input from "../inputs/Input";
 import AuthButton from "../AuthButton";
 import { FcGoogle } from "react-icons/fc";
 import { signIn } from "next-auth/react";
-import Modal from "./Modal";
 import { toast } from "react-hot-toast";
+import AuthModal from "./AuthModal";
 
 const Login = () => {
   //the router to navigate
@@ -96,7 +96,7 @@ const Login = () => {
         icon={FcGoogle}
         onClick={() => signIn("google")}
       />
-      <div className="text-primary text-center mt-4 font-light">
+      <div className="text-primary text-center mt-4 font-light text-sm">
         <p>
           Are you a new user?
           <span
@@ -111,7 +111,7 @@ const Login = () => {
   );
 
   return (
-    <Modal
+    <AuthModal
       disabled={isLoading}
       isOpen={loginModal.isOpen}
       title="Market Login"

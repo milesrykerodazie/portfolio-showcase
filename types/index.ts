@@ -9,6 +9,17 @@ export type FormState = {
   category: string;
 };
 
+export interface UserForm {
+  name: string;
+  username: string;
+  profession: string;
+  shortDescription: string;
+  portfolioImage: string;
+  linkedinUrl: string;
+  email: string;
+  image: string;
+}
+
 export type ProjectImage = {
   id: string;
   projectId: string;
@@ -27,29 +38,44 @@ export interface ProjectInterface {
   id: string;
   owner_id: string;
   title_slug: string;
+  views: number;
   User: {
     name: string;
     image: string;
   };
+  likes: {
+    id: string;
+    projectId: string;
+    userId: string;
+    User: {
+      image: string;
+    };
+  }[];
+}
+
+export interface UserBasicDetails {
+  id: string;
+  name: string;
+  username: string;
+  profession: string;
+  shortDescription: string;
+  portfolioImage: string;
+  linkedinUrl: string;
+  email: string;
+  image: string;
 }
 
 export interface UserProfile {
   id: string;
   name: string;
+  username: string;
+  profession: string;
+  shortDescription: string;
+  portfolioImage: string;
+  linkedinUrl: string;
   email: string;
-  description: string | null;
-  avatarUrl: string;
-  githubUrl: string | null;
-  linkedinUrl: string | null;
-  projects: {
-    edges: { node: ProjectInterface }[];
-    pageInfo: {
-      hasPreviousPage: boolean;
-      hasNextPage: boolean;
-      startCursor: string;
-      endCursor: string;
-    };
-  };
+  image: string;
+  projects: ProjectInterface[];
 }
 
 export interface SessionInterface extends Session {

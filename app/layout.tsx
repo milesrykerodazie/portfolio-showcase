@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import Login from "@/components/modals/Login";
 import Register from "@/components/modals/Register";
 import ToastProvider from "@/providers/ToastProvider";
+import { projectsCount } from "@/lib/actions";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,11 +15,13 @@ export const metadata: Metadata = {
   description: "Showcase your portfolio...",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  //get all projects
+  const projects = (await projectsCount()) as number;
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -27,7 +30,7 @@ export default function RootLayout({
         <Register />
         <Navbar />
         <main>{children}</main>
-        <Footer />
+        <Footer count={projects} />
       </body>
     </html>
   );

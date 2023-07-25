@@ -1,67 +1,83 @@
 "use client";
 
-import { ProjectInterface } from "@/types";
+import { formatCompactNumber } from "@/lib/helpers";
+import { ProjectInterface, SessionInterface } from "@/types";
+import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { AiOutlineEye, AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineEye, AiOutlineHeart } from "react-icons/ai";
 
-const ProjectCard = ({ project }: { project: ProjectInterface }) => {
-  const [randomLikes, setRandomLikes] = useState(0);
-  const [randomViews, setRandomViews] = useState("");
+const ProjectCard = ({
+  project,
+  session,
+}: {
+  project: ProjectInterface;
+  session?: SessionInterface;
+}) => {
+  const hasLiked = project?.likes?.filter(
+    (like) => like?.userId === session?.user?.id
+  );
 
-  useEffect(() => {
-    setRandomLikes(Math.floor(Math.random() * 10000));
-    setRandomViews(
-      String((Math.floor(Math.random() * 10000) / 1000).toFixed(1) + "k")
-    );
-  }, []);
-
+  //project view
+  const viewProject = async (id: string) => {
+    try {
+      await axios.patch(`/api/project-view/${id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
-    <div className="flexCenter flex-col rounded-2xl drop-shadow-card">
+    <div className="flexCenter flex-col bg-white rounded-lg sm:rounded-xl drop-shadow-md w-full">
       <Link
         href={`/project/${project.title_slug}`}
+        onClick={() => {
+          viewProject(project?.id);
+        }}
         className="flexCenter group relative w-full h-full"
       >
         <Image
           src={project?.images[0].url}
           width={414}
           height={314}
-          className="w-full h-full object-cover rounded-2xl"
+          className="w-full h-full object-cover rounded-t-lg sm:rounded-t-2xl"
           alt="project image"
         />
 
-        <div className="hidden group-hover:flex profile_card-title transition-all duration-300 ease-out">
-          <p className="w-full text-sm lg:text-base text-primary tracking-wider font-semibold">
-            {project.title}
-          </p>
+        <div className="profile_card-title ">
+          <p className="w-full tracking-wider font-semibold">{project.title}</p>
         </div>
       </Link>
 
-      <div className="flexBetween w-full px-2 mt-3 font-semibold text-sm space-x-2">
+      <div className="flexBetween p-1 sm:p-2 mt-3 font-semibold text-sm space-x-2">
         <Link href={`/profile/${project.owner_id}`}>
           <div className="flexCenter gap-2">
-            <Image
+            <img
               src={project?.User?.image}
-              width={24}
-              height={24}
-              className="rounded-full"
+              className="rounded-full w-4 h-4 lg:w-5 lg:h-5"
               alt="profile image"
             />
-            <p className="text-xs text-primary truncate">
+            <p className="text-[10px] sm:text-xs text-primary truncate">
               {project?.User?.name}
             </p>
           </div>
         </Link>
 
-        <div className="flexCenter gap-3">
+        <div className="flexCenter gap-2">
           <div className="flexCenter gap-1">
-            <AiOutlineHeart className="text-primary" />
-            <p className="text-xs text-primary">{randomLikes}</p>
+            {hasLiked?.length > 0 ? (
+              <AiFillHeart className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
+            ) : (
+              <AiOutlineHeart className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
+            )}
+            <p className="text-[10px] sm:text-xs text-primary">
+              {project?.likes?.length}
+            </p>
           </div>
-          <div className="flexCenter gap-2">
+          <div className="flexCenter gap-1">
             <AiOutlineEye className="text-primary" />
-            <p className="text-xs text-primary">{randomViews}</p>
+            <p className="text-[10px] sm:text-xs text-primary">
+              {formatCompactNumber(project?.views)}
+            </p>
           </div>
         </div>
       </div>

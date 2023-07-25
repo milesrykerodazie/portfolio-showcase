@@ -13,9 +13,11 @@ const EditProjectPage = async ({ params }: { params: ProjectParams }) => {
   const projectDetails = (await getProjectDetails(params)) as ProjectInterface;
   return (
     <GeneralModal>
-      <h3 className="modal-head-text">Edit Project</h3>
+      <div className="w-[95%] lg:w-[80%] mx-auto">
+        <h3 className="modal-head-text">Edit Project</h3>
 
-      <EditProjectForm projectDetails={projectDetails} />
+        <EditProjectForm projectDetails={projectDetails} />
+      </div>
     </GeneralModal>
   );
 };

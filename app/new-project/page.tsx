@@ -11,9 +11,11 @@ const CreateProject = async () => {
 
   return (
     <GeneralModal>
-      <h3 className="modal-head-text">Create a New Project</h3>
+      <div className="w-[95%] lg:w-[80%] mx-auto">
+        <h3 className="modal-head-text">Create a New Project</h3>
 
-      <ProjectForm session={session} />
+        <ProjectForm session={session} />
+      </div>
     </GeneralModal>
   );
 };
