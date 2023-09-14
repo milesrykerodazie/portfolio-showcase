@@ -107,6 +107,7 @@ const ProjectForm = ({ session }: Props) => {
     setSubmitting(true);
     if (!canSubmit) {
       toast.error("Check all fields.");
+      setSubmitting(false);
       return;
     }
     if (newProjectData.images.length > 5) {
